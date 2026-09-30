@@ -160,9 +160,15 @@ mod tests {
         let err = run("demo", Template::Starter, Some(dir.path())).unwrap_err();
         assert!(matches!(err, CliError::TargetExists { is_file: false, .. }));
         let msg = err.to_string();
-        assert!(msg.contains("directory"), "message should say 'directory': {msg}");
+        assert!(
+            msg.contains("directory"),
+            "message should say 'directory': {msg}"
+        );
         let hint = err.hint().unwrap();
-        assert!(hint.contains("directory"), "hint should say 'directory': {hint}");
+        assert!(
+            hint.contains("directory"),
+            "hint should say 'directory': {hint}"
+        );
     }
 
     #[test]
@@ -174,10 +180,16 @@ mod tests {
         assert!(matches!(err, CliError::TargetExists { is_file: true, .. }));
         let msg = err.to_string();
         assert!(msg.contains("file"), "message should say 'file': {msg}");
-        assert!(!msg.contains("directory"), "message must not say 'directory': {msg}");
+        assert!(
+            !msg.contains("directory"),
+            "message must not say 'directory': {msg}"
+        );
         let hint = err.hint().unwrap();
         assert!(hint.contains("file"), "hint should say 'file': {hint}");
-        assert!(!hint.contains("directory"), "hint must not say 'directory': {hint}");
+        assert!(
+            !hint.contains("directory"),
+            "hint must not say 'directory': {hint}"
+        );
     }
 
     #[test]
